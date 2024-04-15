@@ -1,4 +1,4 @@
-import Homepage from './HomePage/HomePage'
+import HomePage from './HomePage/HomePage'
 import Layout from './Layout/Layout'
 import ListPage from './ListPage/ListPage'
 import Login from './Login/Login'
@@ -9,7 +9,7 @@ import Register from './Register/Register'
 import SinglePage from './SinglePage/SinglePage'
 
 export {
-    Homepage,
+    HomePage,
     Layout,
     ListPage,
     Login,
