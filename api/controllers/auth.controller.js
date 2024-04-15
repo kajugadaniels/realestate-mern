@@ -78,5 +78,5 @@ export const login = async (req, res) => {
 }
 
 export const logout = (req, res) => {
-    console.log("Logout endpoints")
+    res.clearCookie("token").status(200).json({ message: "Logout Successful" })
 }
