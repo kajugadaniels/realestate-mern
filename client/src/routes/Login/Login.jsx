@@ -11,6 +11,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setError("")
     setIsLoading(true)
     const formData = new FormData(e.target);
 
@@ -22,6 +23,8 @@ function Login() {
         username,
         password,
       })
+
+      localStorage.setItem("user", JSON.stringify(res.data))
 
       navigate("/")
     } catch (err) {
