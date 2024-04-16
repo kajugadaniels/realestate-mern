@@ -63,8 +63,11 @@ export const deleteUser = async (req, res) => {
     const id = req.params.id;
     const tokenUserId = req.userId;
 
-    if (id !== tokenUserId) {
-        return res.status(403).json({ message: "Not Authorized" })
+    if (id != tokenUserId) {
+        return res.status(403)
+                    .json({
+                        message: "Not Authorized"
+                    })
     }
 
     try {
@@ -72,9 +75,14 @@ export const deleteUser = async (req, res) => {
             where: { id },
         });
 
-        res.status(200).json({ message: "User deleted!" })
+        res.status(200)
+            .join({
+                message: "User deleted!"
+            })
     } catch (error) {
-        console.log(error)
-        res.status(500).json({ message: "Failed to delete user!" })
+        res.status(500)
+            .join({
+                message: "Failed to delete user!"
+            })
     }
 }
