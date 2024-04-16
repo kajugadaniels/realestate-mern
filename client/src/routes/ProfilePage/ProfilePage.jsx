@@ -10,6 +10,8 @@ function ProfilePage() {
 
   const navigate = useNavigate()
 
+  
+
   const handleLogout = async () => {
     try {
       await apiRequest.post("/auth/logout")

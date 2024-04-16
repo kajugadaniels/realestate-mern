@@ -1,5 +1,4 @@
 import HomePage from './HomePage/HomePage'
-import Layout from './Layout/Layout'
 import ListPage from './ListPage/ListPage'
 import Login from './Login/Login'
 import NewPostPage from './NewPostPage/NewPostPage'
@@ -10,7 +9,6 @@ import SinglePage from './SinglePage/SinglePage'
 
 export {
     HomePage,
-    Layout,
     ListPage,
     Login,
     NewPostPage,

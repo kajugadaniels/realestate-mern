@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { HomePage, Layout, ListPage, Login, ProfilePage, Register, SinglePage } from './routes'
+import { HomePage, ListPage, Login, ProfilePage, Register, SinglePage } from './routes'
+import { Layout, RequireAuth } from "./routes/Layout/Layout";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,10 +21,6 @@ function App() {
           element:<SinglePage />
         },
         {
-          path:"/profile",
-          element:<ProfilePage />
-        },
-        {
           path:"/login",
           element:<Login />
         },
@@ -32,7 +29,17 @@ function App() {
           element:<Register />
         }
       ]
-    }
+    },
+    {
+      path: "/",
+      element: <RequireAuth />,
+      children: [
+        {
+          path:"/profile",
+          element:<ProfilePage />
+        },
+      ],
+    },
   ]);
 
   return (
