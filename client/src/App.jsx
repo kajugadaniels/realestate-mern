@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { HomePage, ListPage, Login, ProfilePage, Register, SinglePage } from './routes'
+import { HomePage, ListPage, Login, ProfilePage, ProfileUpdatePage, Register, SinglePage } from './routes'
 import { Layout, RequireAuth } from "./routes/Layout/Layout";
 
 function App() {
@@ -37,6 +37,10 @@ function App() {
         {
           path:"/profile",
           element:<ProfilePage />
+        },
+        {
+          path:"/profile/update",
+          element:<ProfileUpdatePage />
         },
       ],
     },

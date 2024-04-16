@@ -7,6 +7,7 @@ import Navbar from './Navbar/Navbar'
 import Pin from './Pin/Pin'
 import SearchBar from './SearchBar/SearchBar'
 import Slider from './Slider/Slider'
+import UploadWidget from './UploadWidget/UploadWidget'
 
 export {
     Card,
@@ -17,5 +18,6 @@ export {
     Navbar,
     Pin,
     SearchBar,
-    Slider
+    Slider,
+    UploadWidget
 }
