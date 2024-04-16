@@ -6,14 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { UploadWidget } from "../../components";
 
 function ProfileUpdatePage() {
-  const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [avatar, setAvatar] = useState([]);
-
-  const navigate = useNavigate();
+  const { currentUser, updateUser } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.target);
 
     const { username, email, password } = Object.fromEntries(formData);
@@ -22,16 +20,14 @@ function ProfileUpdatePage() {
       const res = await apiRequest.put(`/users/${currentUser.id}`, {
         username,
         email,
-        password,
-        avatar:avatar[0]
+        password
       });
       updateUser(res.data);
-      navigate("/profile");
-    } catch (err) {
-      console.log(err);
-      setError(err.response.data.message);
+      Navigate("/profile")
+    } catch (error) {
+      setError(error.response.data.message)
     }
-  };
+  }
 
   return (
     <div className="profileUpdatePage">
@@ -65,17 +61,7 @@ function ProfileUpdatePage() {
         </form>
       </div>
       <div className="sideContainer">
-        <img src={avatar[0] || currentUser.avatar || "https://i2.wp.com/vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png"} alt="" className="avatar" />
-        <UploadWidget
-          uwConfig={{
-            cloudName: "mern",
-            uploadPreset: "estate",
-            multiple: false,
-            maxImageFileSize: 2000000,
-            folder: "avatars",
-          }}
-          setState={setAvatar}
-        />
+        <img src="https://i2.wp.com/vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png" alt="" className="avatar" />
       </div>
     </div>
   );
