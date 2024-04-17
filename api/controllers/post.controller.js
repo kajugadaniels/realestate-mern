@@ -13,17 +13,13 @@ export const getPosts = async (req, res) => {
 }
 
 export const getPost = async (req, res) => {
-    const id = req.params
-
     try {
-        const post = await prisma.post.findUnique()
 
-        res.status(200).json(post)
     } catch (error) {
         console.log(error)
-        res.status(500).json({ message: "Failed to get post" })
     }
 }
+
 export const addPost = async (req, res) => {
     const body = req.body;
     const tokenUserId = req.userId;
@@ -31,8 +27,11 @@ export const addPost = async (req, res) => {
     try {
         const newPost = await prisma.post.create({
             data: {
-                ...body,
+                ...body.postData,
                 userId: tokenUserId,
+                postDetail: {
+                    create: body.postDetail
+                }
             }
         });
 
@@ -42,6 +41,7 @@ export const addPost = async (req, res) => {
         res.status(500).json({ message: "Failed to add post" })
     }
 }
+
 export const updatePost = async (req, res) => {
     try {
         
@@ -50,6 +50,7 @@ export const updatePost = async (req, res) => {
         res.status(500).json({ message: "Failed to update post" })
     }
 }
+
 export const deletePost = async (req, res) => {
     const id = req.params.id;
     const tokenUserId = req.userId
