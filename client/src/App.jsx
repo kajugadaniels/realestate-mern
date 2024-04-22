@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomePage, ListPage, Login, NewPostPage, ProfilePage, ProfileUpdatePage, Register, SinglePage } from './routes'
 import { Layout, RequireAuth } from "./routes/Layout/Layout";
-import { singlePageLoader } from "./lib/loaders";
+import { listPageLoader, singlePageLoader } from "./lib/loaders";
 
 function App() {
   const router = createBrowserRouter([
@@ -15,12 +15,13 @@ function App() {
         },
         {
           path:"/list",
-          element:<ListPage />
+          element:<ListPage />,
+          loader: listPageLoader
         },
         {
           path:"/:id",
           element:<SinglePage />,
-          loader: singlePageLoader,
+          loader: singlePageLoader
         },
         {
           path:"/login",

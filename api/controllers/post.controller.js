@@ -2,15 +2,30 @@ import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
 
 export const getPosts = async (req, res) => {
-    try {
-        const posts = await prisma.post.findMany()
+    const query = req.query;
 
-        res.status(200).json(posts)
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({ message: "Failed to get posts" })
+    try {
+        const posts = await prisma.post.findMany({
+            where: {
+                city: query.city || undefined,
+                type: query.type || undefined,
+                property: query.property || undefined,
+                bedroom: parseInt(query.bedroom) || undefined,
+                price: {
+                    gte: parseInt(query.minPrice) || undefined,
+                    lte: parseInt(query.maxPrice) || undefined,
+                },
+            },
+        });
+
+        // setTimeout(() => {
+        res.status(200).json(posts);
+        // }, 3000);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Failed to get posts" });
     }
-}
+};
 
 export const getPost = async (req, res) => {
     const id = req.params.id
@@ -60,7 +75,7 @@ export const addPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
     try {
-        
+
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: "Failed to update post" })
@@ -76,7 +91,7 @@ export const deletePost = async (req, res) => {
             where: { id }
         })
 
-        if(post.userId !== tokenUserId) {
+        if (post.userId !== tokenUserId) {
             return res.status(403).json({ message: "Not Authorized" })
         }
 
